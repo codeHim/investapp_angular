@@ -1,0 +1,86 @@
+<div class="search">
+    <button mat-raised-button id="createButton" (click)="createDialog()">
+        <mat-icon>add</mat-icon> Create
+    </button>
+
+    <mat-form-field>
+        <input (keyup)="filterValue($event.target.value)" matInput placeholder="Filter">
+    </mat-form-field>
+
+    <button mat-raised-button id="investButton" (click)="investListDialog()">
+        <mat-icon>attach_money</mat-icon> Investment History
+    </button>
+
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="dataSource" matSort>
+    <ng-container matColumnDef="fund_id">
+      <th mat-header-cell *matHeaderCellDef > Fund Id </th>
+      <td mat-cell *matCellDef="let element"> {{element.fund_id}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="scheme_code">
+      <th mat-header-cell *matHeaderCellDef > Scheme Code </th>
+      <td mat-cell *matCellDef="let element"> {{element.scheme_code}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="scheme_name">
+      <th mat-header-cell *matHeaderCellDef > Scheme Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.scheme_name}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="isin_div_pay_growth">
+      <th mat-header-cell *matHeaderCellDef > ISIN Div Pay Growth </th>
+      <td mat-cell *matCellDef="let element"> {{element.isin_div_pay_growth}} </td>
+    </ng-container>
+    <ng-container matColumnDef="isin_div_reinvest">
+        <th mat-header-cell *matHeaderCellDef > ISIN Div Reinvest </th>
+        <td mat-cell *matCellDef="let element"> {{element.isin_div_reinvest}} </td>
+      </ng-container>
+      <ng-container matColumnDef="net_asset_value">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Net Asset value </th>
+        <td mat-cell *matCellDef="let element"> {{element.net_asset_value}} </td>
+      </ng-container>
+      <ng-container matColumnDef="repurchase">
+        <th mat-header-cell *matHeaderCellDef > Repurchase Price </th>
+        <td mat-cell *matCellDef="let element" > {{element.repurchase_price}} </td>
+      </ng-container>
+      <ng-container matColumnDef="sale_price">
+        <th mat-header-cell *matHeaderCellDef > Sale Price </th>
+        <td mat-cell *matCellDef="let element"> {{element.sale_price}} </td>
+      </ng-container>
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let row">
+        <button mat-icon-button matTooltip="Update Record" (click)="update(row)"><mat-icon>launch</mat-icon></button>
+        <button mat-icon-button color="warn" matTooltip="Delete Record" (click)="onDelete(row)"><mat-icon>delete_outline</mat-icon></button>
+        <button mat-icon-button color="green" matTooltip="Invest on this fund" (click)="investFundDialog(row)"><mat-icon>attach_money</mat-icon></button>
+        <button mat-icon-button color="black" matTooltip="CalculateFundValue" (click)="calculateFundValue(row)"><mat-icon>calculate</mat-icon></button>
+        </td>
+        
+      </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="Columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: Columns;"></tr>
+
+</table>
+<mat-paginator [pageSizeOptions]="[20,40,70,100]" [pageSize]="20" showFirstLastButtons></mat-paginator>
+
+<div *ngIf=investFlag id='investDiv'>
+    <mat-form-field>
+        <input type="number" matInput placeholder="enter Amount" #investAmount>
+    </mat-form-field>
+    <button mat-raised-button (click)="makeInvestments(investAmount.value)">
+        <mat-icon>attach_money</mat-icon> Invest
+    </button>
+</div>
+
+<div *ngIf=calculateFlag id='calculateDiv'>
+    <p>Your current value as per today is {{ currentFundValue }}</p>
+</div>
+
+

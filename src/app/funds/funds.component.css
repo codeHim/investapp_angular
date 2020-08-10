@@ -1,0 +1,23 @@
+table {
+    width: 100%;
+  }
+
+.search {
+    margin: 10px;
+}
+
+#createButton{
+    margin-right: 20px;
+}
+
+#investDiv {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#calculateDiv{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
