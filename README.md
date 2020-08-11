@@ -14,5 +14,7 @@ Run `npm install` in the project directory to install all dependencies for this 
 
 ## Development server
 
+First make sure the investapp django project is up and running, then:
+
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/test`.
 
