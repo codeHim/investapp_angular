@@ -30,30 +30,33 @@ export class FundsComponent implements OnInit {
   constructor(private http:Http,private dialog: MatDialog,private service : FundsService) { }
 
   ngOnInit(): void {
-    
+    this.dataSource = new MatTableDataSource();
     this.getFundsList();
     
+    }
+    ngAfterViewInit (){
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }
 
     getFundsList(){
       this.http.get('http://localhost:8000/list/').subscribe(data => {
           let result  = data['_body']
           this.elements = JSON.parse(result);
-          this.dataSource = new MatTableDataSource(this.elements);
-          this.dataSource.sort = this.sort;
-          this.dataSource.paginator = this.paginator;
+          this.dataSource.data = this.elements;
           this.dataSource.sortingDataAccessor = (item, property) => {
             switch (property) {
               case 'date': return new Date(item.date);
               default: return item[property];
             }
           };
+          return this.elements;
         });
 
     }
 
     
-    Columns: string[] = ['fund_id', 'scheme_code', 'scheme_name', 'isin_div_pay_growth','isin_div_reinvest','net_asset_value','repurchase','sale_price','date','actions'];
+    Columns: string[] = ['fund_id', 'scheme_code', 'scheme_name', 'isin_div_pay_growth','isin_div_reinvest','net_asset_value','repurchase_price','sale_price','date','actions'];
 
   
 
@@ -122,6 +125,7 @@ export class FundsComponent implements OnInit {
     console.log(data);
     this.currentFundValue = data['_body']
   });
+  this.investFlag = false;
   this.calculateFlag = true;
   }
 

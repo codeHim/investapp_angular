@@ -13,9 +13,9 @@
 
 </div>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="dataSource" matSort>
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" *ngIf="dataSource">
     <ng-container matColumnDef="fund_id">
-      <th mat-header-cell *matHeaderCellDef > Fund Id </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Fund Id </th>
       <td mat-cell *matCellDef="let element"> {{element.fund_id}} </td>
     </ng-container>
   
@@ -41,7 +41,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Net Asset value </th>
         <td mat-cell *matCellDef="let element"> {{element.net_asset_value}} </td>
       </ng-container>
-      <ng-container matColumnDef="repurchase">
+      <ng-container matColumnDef="repurchase_price">
         <th mat-header-cell *matHeaderCellDef > Repurchase Price </th>
         <td mat-cell *matCellDef="let element" > {{element.repurchase_price}} </td>
       </ng-container>

@@ -20,7 +20,7 @@ export class InvestmentComponent implements OnInit {
 
   }
   
-  Columns: string[] = ["invest_id","invested_on","units_purchased","total_amount"]
+  Columns: string[] = ["invest_id","fundId", "invested_on","units_purchased","total_amount"]
   getInvestments(){
     let result;
     this.http.get('http://localhost:8000/invest/').toPromise().then(data =>{
