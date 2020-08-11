@@ -4,9 +4,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Prerequisites
 
-- nodejs
-- npm
-- angular-cli
+- nodejs (`sudo apt install nodejs`) *linux
+- npm    (`sudo apt install npm`) *linux
+- angular-cli  (`npm install -g @angular/cli`)
 
 ## Installing dependencies
 
